@@ -1,0 +1,18 @@
+{
+  "name": "dedicated-to-develop",
+  "version": "1.0.0",
+  "description": "This is web app and mobile app backend for an AI powered productivity SaaS platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dedicated-to-develop"
+  ],
+  "author": "Arun S. Sengar",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.5"
+  }
+}
