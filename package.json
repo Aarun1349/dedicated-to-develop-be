@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "This is web app and mobile app backend for an AI powered productivity SaaS platform",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon -r dotenv/ccpnfig --experimental-json-modules src/index.js"
   },
   "keywords": [
     "dedicated-to-develop"
   ],
-  "author": "Arun S. Sengar",
+  "author": "Arun S.Sengar",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^3.0.3",
