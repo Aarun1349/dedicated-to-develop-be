@@ -17,10 +17,9 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 
 //route imports
-import userRouter from "./routes/user.route.js"
-
+import userRouter from "./routes/user.route.js";
 
 //routes declaration
-app.use("/api/v1/users",userRouter)
+app.use("/api/v1/users", userRouter);
 
 export { app };
