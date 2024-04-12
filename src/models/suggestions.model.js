@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
-const suggsestionSchema = new Schema(
+const suggestionSchema = new Schema(
   {
     suggestion: {
       unique: true,
@@ -22,6 +22,6 @@ const suggsestionSchema = new Schema(
   },
   { timestamps: true }
 );
-suggsestionSchema.plugin(mongooseAggregatePaginate);
-const Suggestion = model("Suggestion", suggsestionSchema);
+suggestionSchema.plugin(mongooseAggregatePaginate);
+const Suggestion = model("Suggestion", suggestionSchema);
 export { Suggestion };
