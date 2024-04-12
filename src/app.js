@@ -15,8 +15,10 @@ app.use(express.static("public"))   ;
 
 //routes imports
 import userRouter from "./routes/user.route.js";
+import bulletRouter from "./routes/bullet.route.js";
 
 //routes declaration
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/bullet", bulletRouter);
 
 export { app };

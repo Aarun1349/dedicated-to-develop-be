@@ -13,6 +13,11 @@ const bulletsSchema = new Schema(
       enum: ["TASK", "EVENT", "MEETING", "HABBIT", "ERRAND", "WORK"],
       default: "TASK",
     },
+    state:{
+        type:String,
+        enum:["Pending","ReScheduled","Cancelled","Completed","Delegated"],
+        default:"Pending"
+    },
     priority: {
       type: String,
       enum: ["PRIORITY 1", "PRIORITY 2 ", "PRIORITY 3", "PRIORITY 4"],

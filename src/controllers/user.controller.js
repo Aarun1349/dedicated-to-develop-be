@@ -3,6 +3,7 @@ import { User } from "../models/user.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/Cloudinary.js";
+
 const generateAccessAndRefreshToken = async (userId) => {
   try {
     const user = await User.findById(userId);
@@ -186,7 +187,7 @@ const updateAvatar = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "Avatar Updated Successfully"));
 });
 
-const refreshAccessToken = asyncHandlerPromiseVersion(async (req, res) => {
+const refreshAccessToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
     req.cookies.refreshToken || req.body.refreshToken;
   if (!incomingRefreshToken) {
@@ -227,7 +228,7 @@ const refreshAccessToken = asyncHandlerPromiseVersion(async (req, res) => {
     );
 });
 
-const changeCurrentPassword = asyncHandlerPromiseVersion(async (req, res) => {
+const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { oldPassword, newPassword } = req.body;
 
   if (!oldPassword || !newPassword) {
@@ -248,7 +249,7 @@ const changeCurrentPassword = asyncHandlerPromiseVersion(async (req, res) => {
     .json(new ApiResponse(200, user, "Password Updated Successfully!"));
 });
 
-const getCurrentUser = asyncHandlerPromiseVersion(async (req, res) => {
+const getCurrentUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user?._id).select("-password");
   if (!user) {
     throw new ApiError(404, "User not found");
@@ -256,7 +257,7 @@ const getCurrentUser = asyncHandlerPromiseVersion(async (req, res) => {
   return res.status(200).json(new ApiResponse(200, user));
 });
 
-const updateUserDetails = asyncHandlerPromiseVersion(async (req, res) => {
+const updateUserDetails = asyncHandler(async (req, res) => {
   const { fullname } = req.body;
 
   if (!fullname) {
