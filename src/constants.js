@@ -1,1 +1,1 @@
-export const DB_NAME ="DEVELOP"
+export const DB_NAME ="develop"
