@@ -19,6 +19,7 @@ import bulletRouter from "./routes/bullet.route.js";
 import suggestionRouter from "./routes/suggestion.route.js";
 import noteRouter from "./routes/note.route.js";
 import futureRouter from "./routes/futureLog.route.js";
+import habitRouter from "./routes/habit.route.js";
 
 //routes declaration
 app.use("/api/v1/users", userRouter);
@@ -26,5 +27,6 @@ app.use("/api/v1/bullet", bulletRouter);
 app.use("/api/v1/suggest", suggestionRouter);
 app.use("/api/v1/note", noteRouter);
 app.use("/api/v1/future", futureRouter);
+app.use("/api/v1/habit", habitRouter);
 
 export { app };

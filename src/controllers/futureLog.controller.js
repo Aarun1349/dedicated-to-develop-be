@@ -62,7 +62,6 @@ const addFutureLog = asyncHandler(async (req, res) => {
 const getLog = asyncHandler(async (req, res) => {
   const userId = req.user?.id;
   const { id } = req.params;
-  console.log("aimid_______", id, userId);
   if (!userId) {
     throw new ApiError(404, "Please login first");
   }
