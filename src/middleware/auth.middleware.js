@@ -6,11 +6,12 @@ import { Admin } from "../models/admin.model.js";
 
 export const verifyJWT = asyncHandler(async (req, _, next) => {
   // can be found this code in production scenario
-
+  console.log("the cookies____", req.cookies);
   try {
     const token =
       req.cookies?.accessToken ||
       req.header("Authorization")?.replace("Bearer ", "");
+      console.log("token____",token)
     if (!token || token === undefined) {
       throw new ApiError(401, "Unauthorized User");
     }
@@ -18,7 +19,7 @@ export const verifyJWT = asyncHandler(async (req, _, next) => {
     const user = await User.findById(decoded?._id).select(
       "-password -refreshToken"
     );
-
+    console.log("the user token____", decoded, user);
     if (!user) {
       //NEXT_VIDEO: discuss abput frontend
       throw new ApiError(401, "Invalid Access Token");

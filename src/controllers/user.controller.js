@@ -23,8 +23,10 @@ const generateAccessAndRefreshToken = async (userId) => {
 
 const userSignUp = asyncHandler(async (req, res) => {
   //Step 1: get user details from frontend
-  const { username, fullname, email, password } = req.body;
+  const { fullname, email, password } = req.body;
   console.log("body", req.body, req.files);
+  let { username } = req.body;
+  if (!username) username = fullname;
   //Step2: validation
   if (
     [fullname, username, email, password].some((field) => field?.trim() === "")
@@ -100,10 +102,11 @@ const userSignUp = asyncHandler(async (req, res) => {
 const userSignIn = asyncHandler(async (req, res) => {
   //Step: 1 get user details from database
   const { username, email, password } = req.body;
-  console.log("user", req.body);
+  // console.log("user", req.body);
   if ((!username || !email) && !password) {
     throw new ApiError(400, "username or email is required");
   }
+
   //Step2: validation
   if ([username, email, password].some((field) => field?.trim() === "")) {
     throw new ApiError(400, "All fields are required");
@@ -130,6 +133,7 @@ const userSignIn = asyncHandler(async (req, res) => {
     "-password -refreshToken"
   );
   const options = { httpOnly: true, secure: true };
+
   return res
     .status(200)
     .cookie("accessToken", accessToken, options)

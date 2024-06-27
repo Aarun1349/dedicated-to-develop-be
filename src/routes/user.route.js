@@ -1,9 +1,15 @@
 import { Router } from "express";
-import { userSignUp, userSignIn } from "../controllers/user.controller.js";
+import {
+  userSignUp,
+  userSignIn,
+  logoutUser,
+} from "../controllers/user.controller.js";
 import { upload } from "../middleware/multer.middleware.js";
+import { verifyJWT } from "../middleware/auth.middleware.js";
 const userRouter = Router();
 
-userRouter.route("/login").get(userSignIn);
+userRouter.route("/login").post(userSignIn);
+userRouter.route("/logout").post(verifyJWT, logoutUser);
 userRouter.route("/signup").post(
   upload.fields([
     { name: "avatar", maxCount: 1 },

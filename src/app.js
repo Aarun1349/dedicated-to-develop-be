@@ -6,8 +6,20 @@ const app = express();
 
 //Middlewares
 
-app.use(cors({ origin: process.env.CORS_ORIGIN }));
+// app.use(cors({ origin: process.env.CORS_ORIGIN, credentials: true }));
+const corsOptions = {
+  origin: "http://localhost:3000", // Replace with your frontend's origin
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+};
+
+app.use(cors(corsOptions));
 app.use(cookieParser());
+// Middleware to log cookies
+// app.use((req, res, next) => {
+//     console.log("Cookies: ", req.cookies);
+//     next();
+//   });
 app.use(express.json({ limit: "16kb" }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
