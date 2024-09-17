@@ -37,9 +37,9 @@ const getAllNotes = asyncHandler(async (req, res) => {
   if (!userId) {
     throw new ApiError(404, "Please login first");
   }
-  const allNotes = await Note.find({ user: userId });
+  const allNotes = await Note.find({ user: userId }); 
   if (allNotes.length <= 0) {
-    throw new ApiError(404, "No Suggestion is available for you");
+    throw new ApiError(404, "No Notes is available for you");
   }
   res.status(200).json(new ApiResponse(200, allNotes, "success"));
 });
