@@ -262,7 +262,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 });
 
 const updateUserDetails = asyncHandler(async (req, res) => {
-  const { fullname } = req.body;
+  const { fullname, username } = req.body;
 
   if (!fullname) {
     throw new ApiError(400, "Please provide required details");
@@ -272,6 +272,7 @@ const updateUserDetails = asyncHandler(async (req, res) => {
     {
       $set: {
         fullname: fullname,
+        username: username,
       },
     },
     { new: true }

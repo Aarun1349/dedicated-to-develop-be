@@ -2,7 +2,7 @@ import { asyncHandler } from "../utils/AsyncHandler.js";
 import { Note } from "../models/notes.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-
+import { mongoose } from "mongoose";
 const addNewNote = asyncHandler(async (req, res) => {
   const userId = req.user?.id;
   const { content, title } = req.body;
@@ -97,11 +97,15 @@ const getNote = asyncHandler(async (req, res) => {
 
 const deleteNote = asyncHandler(async (req, res) => {
   const userId = req.user?.id;
+  console.log('parameter___',req.params)
   const { noteId } = req.params;
   if (!userId) {
     throw new ApiError(404, "Please login first");
   }
-  const existingNote = await Note.findById({
+  if (!mongoose.Types.ObjectId.isValid(noteId)) {
+    throw new ApiError(400, "Invalid note ID");
+  }
+  const existingNote = await Note.findOne({
     _id: noteId,
     user: userId,
   });
