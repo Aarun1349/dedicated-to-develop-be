@@ -37,6 +37,7 @@ const userSignUp = asyncHandler(async (req, res) => {
   //Step3: if user already exist
   const existedUser = await User.findOne({ $or: [{ email }, { username }] });
   if (existedUser) {
+    console.log("error", new ApiError(400, "user already existed"));
     throw new ApiError(400, "user already existed");
   }
 
@@ -163,7 +164,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     .status(200)
     .clearCookie("accessToken", options)
     .clearCookie("refreshToken", options)
-    .json(new ApiResponse(200, {}, "User logged Out"));
+    .json(new ApiResponse(200, { logout: true }, "User logged Out"));
 });
 
 const updateAvatar = asyncHandler(async (req, res) => {
