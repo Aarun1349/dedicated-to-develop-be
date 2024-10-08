@@ -13,12 +13,12 @@ const addNewNote = asyncHandler(async (req, res) => {
     throw new ApiError(404, "note title and content is required");
   }
 
-  // const existingSuggestion = await Suggestion.findOne({
-  //   suggestion,
-  // });
-  // if (existingSuggestion) {
-  //   throw new ApiError(400, "Suggestion is already present");
-  // }
+  const existingNote = await Note.findOne({
+    title,
+  });
+  if (existingNote) {
+    throw new ApiError(400, "Note is already present");
+  }
   const newNote = await Note.create({
     user: userId,
     title,
@@ -26,7 +26,7 @@ const addNewNote = asyncHandler(async (req, res) => {
   });
   console.log(newNote);
   if (!newNote) {
-    throw new ApiError(400, "Someting went wrong");
+    throw new ApiError(400, "Something went wrong");
   }
 
   res.status(200).json(new ApiResponse(200, newNote, "success"));
